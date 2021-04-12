@@ -1,4 +1,4 @@
-# Operadores Básicos, Relacionais e Lógico em R.
+# Variáveis em R.
 
 
 # Configurando o diretório de trabalho
@@ -94,4 +94,3 @@ x
 
 
 # Sair
-q()
