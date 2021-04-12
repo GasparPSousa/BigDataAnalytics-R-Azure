@@ -2,4 +2,4 @@
 
 ## 1º curso da Formação de Cientista de Dados na Data Science Academy
 
-### Esse repositório é para ir fazendo e praticando todo o aprendizado no curso e servir de consultas futuras.
+### Criei esse repositório para ir fazendo e praticando todo o aprendizado no curso e servir de consultas futuras.
