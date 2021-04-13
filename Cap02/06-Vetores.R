@@ -1,4 +1,4 @@
-# Tipos de Dados Avançados em R.
+# Vetores, Operações com Vetores e Vetores Nomeados
 
 
 # Configurando o diretório de trabalho
