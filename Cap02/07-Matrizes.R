@@ -12,6 +12,7 @@ getwd()
 
 
 # Criando Matrizes
+# Use matrix() para criar matrizes
 
 # Número de Linhas
 

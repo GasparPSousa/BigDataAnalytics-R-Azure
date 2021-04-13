@@ -11,6 +11,9 @@ setwd("~/Cursos/DSA/FCD/BigDataRAzure/Cap02")
 getwd()
 
 
+# Criando Vetores
+# Use c() para criar Vetores
+
 # Vetor de strings
 vetor_caracter = c("Data", "Science", "Academy")
 vetor_caracter
