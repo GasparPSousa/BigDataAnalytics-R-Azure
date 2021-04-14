@@ -108,4 +108,7 @@ filter(iris, Sepal.Length > 7 )
 
 iris
 
+# Sair
+q()
+
 
