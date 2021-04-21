@@ -34,7 +34,7 @@ medias = by(extra, group, mean)
 
 # Adiciona a média ao gráfico
 points(medias, col = "red")
-
+?points
 # Boxplot horizontal
 
 boxPlotHorizontal = boxplot(data = sleep, extra ~ group, 
@@ -50,7 +50,7 @@ boxPlotHorizontal = boxplot(data = sleep, extra ~ group,
 
 
 # Salvando o boxplot Vertical em png.
-png("Grafico4_boxPlotVertical.png", width = 500, height = 500, res = 72)
+png("Grafico4_boxPlotVertical.png", width = 500, height = 1000, res = 72)
 
 sleepBoxPlot = boxplot(data = sleep, extra ~ group, main = "Duração do Sono (Boxplot Vertical)",
                        col.main = "red",
@@ -66,7 +66,7 @@ dev.off()
 
 
 # Salvando o boxplot Horizontal em png.
-png("Grafico4_boxPlotHorizontal.png", width = 500, height = 500, res = 72)
+png("Grafico4_boxPlotHorizontal.png", width = 1000, height = 500, res = 72)
 
 boxPlotHorizontal = boxplot(data = sleep, extra ~ group, 
                             main = "Duração do Sono (Boxplot Horizontal)",
@@ -74,13 +74,11 @@ boxPlotHorizontal = boxplot(data = sleep, extra ~ group,
                             horizontal = T,
                             col = c("blue", "red"))
 
-medias = by(extra, group, mean)
 
-points(medias, col = "black")
 
 dev.off()
 
 # Sair
 q()
 
-
+?png
