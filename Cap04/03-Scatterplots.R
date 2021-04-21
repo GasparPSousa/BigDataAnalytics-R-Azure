@@ -23,7 +23,7 @@ z = rnorm(10, 6, 7)
 t = rpois(10, 9)
 
 
-pdf("Grafico3_ScatterPlot.pdf")
+## pdf("Grafico3_ScatterPlot.pdf")
 
 # Cria o Plot
 plot(x, y, col = 123, pch = 10, main = "Multi Scatterplot", 
@@ -47,8 +47,25 @@ legend(-6, 5.9, legend = c("Nível 1", "Nível 2", "Nível 3"),
        cex = 0.65, bty = "n")
 
 
-dev.off()
+## dev.off()
 
+# Salvando o gráfico em png
+
+png("Grafico3_ScatterPlot.png", width = 500, height = 500, res = 72)
+
+plot(x, y, col = 123, pch = 10, main = "Multi Scatterplot", 
+     col.main = "red", cex.main = 1.5, xlab = "Variável Independente", 
+     ylab = "Variável Dependente")
+
+points(z, t, col = "blue", pch = 4)
+
+points(y, t, col = 777, pch = 9)
+
+legend(-6, 5.9, legend = c("Nível 1", "Nível 2", "Nível 3"),
+       col = c(123, "blue", 777), pch = c(10, 4, 9),
+       cex = 0.65, bty = "n")
+
+dev.off()
 
 # Sair
 q()
