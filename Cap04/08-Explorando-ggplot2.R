@@ -136,3 +136,35 @@ ggplot(data, aes(x = var1, y = var2)) +
 dev.off()
 
 
+# Bar Plot
+
+data = data.frame(grupo = c("A ", "B ", "C ", "D ") ,
+                  valor = c(33, 62, 56, 67), 
+                  num_obs = c(100, 500, 459, 342))
+
+# Gerando a massa de dados
+
+data$right = cumsum(data$num_obs) + 30 * c(0:c(nrow(data)-1))
+data$left = data$right - data$num_obs
+
+# Plot
+
+ggplot(data, aes(ymin = 0)) +
+  geom_rect(aes(xmin = left, xmax = right, ymax =valor, color = grupo, fill = grupo)) +
+  xlab('Número de Observações') + ylab('Valor') 
+               
+  
+
+# Salvando o gráfico em png
+
+png("Grafico8_ggplot2_Barplot1.png", width = 800, height = 500, res = 72)
+
+ggplot(data, aes(ymin = 0)) +
+  geom_rect(aes(xmin = left, xmax = right, ymax =valor, color = grupo, fill = grupo)) +
+  xlab('Número de Observações') + ylab('Valor')
+
+dev.off()
+
+
+
+                
