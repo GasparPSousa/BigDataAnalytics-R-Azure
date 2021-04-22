@@ -17,6 +17,7 @@ search()
 
 # https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf
 # https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+# https://www.rstudio.com/wp-content/uploads/2016/03/ggplot2-cheatsheet-portuguese.pdf
 
 # Instalando e carregando o pacote
 
