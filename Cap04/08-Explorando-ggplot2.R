@@ -166,5 +166,154 @@ ggplot(data, aes(ymin = 0)) +
 dev.off()
 
 
+# Usando o mtcars
 
-                
+head(mtcars)
+
+ggplot(data = mtcars, aes(x = disp, y = mpg)) + geom_point()                
+
+# Outro aspecto que pode ser mapeado nesse gráfico é a cor dos pontos
+
+ggplot(data = mtcars, aes(x = disp, y = mpg, colour = as.factor(am))) + geom_point()
+
+
+# No entanto, tambem podemos mapear uma variável contínua à cor dos pontos:
+ggplot(mtcars, aes(x = disp, y = mpg, colour = cyl)) + geom_point()
+
+# Também podemos mapear o tamanho dos pontos à uma variável de interesse:
+# A legenda é inserida no gráfico automaticamente
+
+ggplot(mtcars, aes(x = disp, y = mpg, colour = cyl, size = wt)) + geom_point()
+
+# Salvando o gráfico em png
+
+png("Grafico8_ggplot2_Scatterplot3.png", width = 800, height = 500, res = 72)
+
+ggplot(mtcars, aes(x = disp, y = mpg, colour = cyl, size = wt)) + geom_point()
+
+dev.off()
+
+
+# Os geoms definem qual forma geométrica será utilizada para a visualização dos dados no gráfico. 
+
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg)) + geom_boxplot()
+
+
+# Histogramas
+
+ggplot(mtcars, aes(x = mpg), binwidth = 30) + geom_histogram()
+
+
+# Gráfico de Barras
+
+ggplot(mtcars, aes(x = as.factor(cyl))) + geom_bar()
+
+
+# Personalizando os gráficos
+
+colors()
+
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg, colour = as.factor(cyl))) + geom_boxplot()
+
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg, fill = as.factor(cyl))) + geom_boxplot()
+
+ggplot(mtcars, aes(x = as.factor(cyl), y = mpg)) + geom_boxplot(color = 'blue', fill = 'seagreen4')
+
+
+# Podemos alterar os eixos
+
+ggplot(mtcars, aes(x = mpg)) + geom_histogram() + xlab('Milhas Por Galão') + ylab('Frequência')
+
+
+# Legendas
+
+ggplot(mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) + geom_bar() + labs(fill = 'cyl')
+
+
+# Trocando a posição da legenda
+
+ggplot(mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) + geom_bar() + labs(fill = 'cyl') + theme(legend.position = 'top')
+
+# Sem legenda
+
+ggplot(mtcars, aes(x = as.factor(cyl), fill = as.factor(cyl))) + geom_bar() + guides(fill = F)
+
+
+# Facets
+
+ggplot(mtcars, aes(x = mpg, y = disp, colour = as.factor(cyl))) + 
+  geom_point() + 
+  facet_grid(am~.)
+
+### (am~.)  está relacionando(~) a variável am(am) com todas as outras(.).
+
+ggplot(mtcars, aes(x = mpg, y = disp, colour = as.factor(cyl))) + 
+  geom_point() + 
+  facet_grid(.~am)
+
+### (.~am)  mesma coisa que a anterior, só que agora na vertical. Na anterior era Horizontal.
+
+
+
+# Plots diferentes juntos (diferente de Facet)
+
+install.packages("gridExtra")
+library(gridExtra)
+library(ggplot2)
+
+
+# Dataset diamonds
+
+data(diamonds)
+
+
+# Histograma como plot1
+plot1 <- qplot(price, data = diamonds, binwidth = 1000)
+
+
+# ScatterPlot como plot2
+plot2 <- qplot(carat, data = diamonds, colour = cut)
+
+
+# Combina os 2 plots na mesma área
+grid.arrange(plot1, plot2, ncol = 1)
+
+
+# Gráficos de Densidade
+ggplot(data = diamonds, aes(x = price, group = cut, fill = cut)) + geom_density(adjust = 1.5)
+
+ggplot(data = diamonds, aes(x = price, group = cut, fill = cut)) + geom_density(adjust = 1.5, alpha = 0.2)
+
+ggplot(data = diamonds, aes(x = price, group = cut, fill = cut)) + geom_density(adjust = 1.5, position = 'fill')
+
+# Facets com reshape
+
+
+install.packages("reshape2")
+install.packages("plotly")
+library(reshape2)
+library(plotly)
+
+sp <- ggplot(tips, aes(x = total_bill, y = tip/total_bill)) + geom_point(shape = 1)
+sp + facet_grid(sex ~ .)
+ggplotly()
+sp + facet_grid(. ~ sex)
+ggplotly()
+sp + facet_wrap( ~ day, ncol = 2)
+ggplotly()
+
+
+ggplot(mpg, aes(displ, hwy)) + geom_point() + facet_wrap(~manufacturer)
+ggplotly()
+
+# Sair
+q()
+
+
+
+
+
+
+
+
+
