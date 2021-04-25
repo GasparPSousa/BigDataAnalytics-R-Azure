@@ -1,4 +1,4 @@
-# BoxPlots
+# Trabalhando com Arquivos TXT.
 
 # Configurando o diretório de trabalho
 # Coloque entre aspas o diretório de trabalho que você está usando no seu computador
@@ -14,6 +14,9 @@ search()
 
 # Usando as funções base do R (pacote utils)
 search()
+
+## Essas funções do Pacote Utils, podemos usar tanto para arquivos .txt, quanto para arquivos .csv 
+
 
 
 # Importando arquivo com read.table()
