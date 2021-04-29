@@ -1,1 +1,1 @@
-# Cap05 - Importação de Arquivos TXT, CSV e Planilhas Excel em R
+# Cap05 - Importação de Arquivos TXT, CSV, Planilhas Excel, JSON e XML em R
