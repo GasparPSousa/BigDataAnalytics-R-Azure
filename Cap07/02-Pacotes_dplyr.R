@@ -1,4 +1,4 @@
-# Exercícios Cap06
+# Pacotes dplyr
 
 # Configurando o diretório de trabalho
 # Coloque entre aspas o diretório de trabalho que você está usando no seu computador
