@@ -155,4 +155,4 @@ dbDisconnect(con)
 # Fechando a conexão
 
 # Sair
-q()
+n
