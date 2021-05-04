@@ -8,6 +8,7 @@
 ### Cap05 - Manipulação de Arquivos TXT, CSV, Planilhas Excel, JSON e XML em R
 ### Cap06 - Trabalhando com Bancos de Dados Relacionais e NoSQL em R
 ### Cap07 - Manipulando Dados com R
-### Cap08 - Introdução a Análise Estatística de Dados - Parte 1
+### Cap08 - Introdução à Análise Estatística de Dados - Parte 1
+### Cap09 - introdução à Análise Estatística de Dados - Parte 2
 
 ##### Criei esse repositório para ir fazendo e praticando todo o aprendizado desenvolvido curso e servir de consultas futuras.
