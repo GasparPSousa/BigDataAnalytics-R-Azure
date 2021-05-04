@@ -1,129 +1,75 @@
-vetor1 <- c(1:20)
-vetor1
-length(vetor1)
-mode(vetor1)
-class(vetor1)
-typeof(vetor1)
-matriz1 <- matrix(1:20, nrow = 2)
-matriz1
-length(matriz1)
-mode(matriz1)
-class(matriz1)
-typeof(matriz1)
-array1 <- array(1:5, dim = c(3, 3, 3))
-array1
-length(array1)
-mode(array1)
-class(array1)
-typeof(array1)
-View(iris)
-length(iris)
-mode(iris)
-class(iris)
-typeof(iris)
-lista1 <- list(a = matriz1, b = vetor1)
-lista1
-length(lista1)
-mode(lista1)
-class(lista1)
-typeof(lista1)
-func1 <- function(x) {
-var1 <- x * x
-return(var1)
-}
-func1(5)
-class(func1)
-objects()
-rm(array1, func1)
-objects()
-array1 <- array(1:5, dim = c(3, 3, 3))
-func1 <- function(x) {
-var1 <- x * x
-return(var1)
-}
-q()
-str <- c("Expressões", "regulares", "em linguagem R",
-"permitem a busca de padrões", "e exploração de textos",
-"podemos buscar padrões em dígitos",
-"como por exemplo",
-"10992451280")
-length(str)
-str
-grep("ex", str, value = F)
-grep("ex", str, value = T)
-grep("\\d", str, value = F)
-grep("\\d", str, value = T)
-grepl("\\d+", str)
-grepl("\\D", str)
-gsub("em", "***", str)
-gsub("ex", "EX", str, ignore.case = T)
-sub("em", "EM", str)
-frase <- "Isso é uma string."
-regexpr(pattern = "u", frase)
-gregexpr(pattern = "u", frase)
-str2 <- c("2678 é maior que 45 - @???!§$",
-"Vamos escrever 14 scripts R")
-str2
-gsub("\\d", "", str2)
-gsub("\\D", "", str2)
-gsub("\\s", "", str2)
-gsub("[iot]", "Q", str2)
-gsub("[[:punct:]]", "", str2)
-q()
-View(iris)
+# Exercícios Cap07
+
 # Configurando o diretório de trabalho
 # Coloque entre aspas o diretório de trabalho que você está usando no seu computador
 # Não use diretórios com espaço no nome
 setwd("~/Cursos/DSA/FCD/BigDataRAzure/Cap07")
+
 # Para saber qual diretório estou trabalhando
 getwd()
+
+
 # Lista de pacotes base carregados
 search()
+
+
 # Formatando os dados de uma página web
 library(rvest)
 library(stringr)
 library(tidyr)
+
 # Exercício 1 - Faça a leitura da url abaixo e grave no objeto pagina
 # http://forecast.weather.gov/MapClick.php?lat=42.31674913306716&lon=-71.42487878862437&site=all&smap=1#.VRsEpZPF84I
 pagina <- read_html("http://forecast.weather.gov/MapClick.php?lat=42.31674913306716&lon=-71.42487878862437&site=all&smap=1#.VRsEpZPF84I")
 pagina
+
 # Exercício 2 - Da página coletada no item anterior, extraia o texto que contenha as tags:
 # "#detailed-forecast-body b  e .forecast-text"
 previsao <- html_nodes(pagina, "#detailed-forecast-body b , .forecast-text")
 ?html_nodes
 previsao
-previsao
+
 # Exercício 3 - Transforme o item anterior em texto
 texto <- html_text(previsao)
 paste(texto, collapse = " ")
+
+
 # Exercício 4 - Extraímos a página web abaixo para você. Agora faça a coleta da tag "table"
 url <- 'http://espn.go.com/nfl/superbowl/history/winners'
 pagina <- read_html(url)
 tabela <- html_nodes(pagina, 'table')
 class(tabela)
+
+
 # Exercício 5 - Converta o item anterior em um dataframe
 tab <- html_table(tabela)[[1]]
 class(tab)
 head(tab)
 View(tab)
+
+
 # Exercício 6 - Remova as duas primeiras linhas e adicione nomes as colunas
 tab <- tab[-(1:2), ]
 head(tab)
 names(tab) <- c("number", "date", "site", "result")
 head(tab)
 View(tab)
-# Exercício 7 - Converta de algarismos romanos para números inteiros
-tab$number <- 1:52
+
+
 # Exercício 7 - Converta de algarismos romanos para números inteiros
 tab$number <- 1:55
 tab$date <- as.Date(tab$date, "%B. %d, %Y")
 head(tab)
 View(tab)
+
+
 # Exercício 8 - Divida as colunas em 4 colunas
 tab <- separate(tab, result, c('winner', 'loser'), sep = ', ', remove = TRUE)
 # Vai pegar a coluna result da tabela tab e criar duas novas colunas(winner e loser), usar a vírgula para separar e depois remover a vírgula.
 head(tab)
 View(tab)
+
+
 # Exercício 9 - Inclua mais 2 colunas com o score dos vencedores e perdedores
 # Dica: Você deve fazer mais uma divisão nas colunas
 pattern <- " \\d+$"
@@ -133,10 +79,12 @@ tab$winner <- gsub(pattern, "", tab$winner)
 tab$loser <- gsub(pattern, "", tab$loser)
 head(tab)
 View(tab)
+
 # Exercício 10 - Grave o resultado em um arquivo csv
 write.csv(tab, 'superbowl.csv', row.names = F)
 dir()
+
 # Sair
 q()
-# Sair
-q()
+
+
