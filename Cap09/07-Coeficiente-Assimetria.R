@@ -13,7 +13,7 @@ getwd()
 search()
 
 
-##### Coeficiente de Assimetria #####
+##### Coeficiente de Assimetria ##### (Você olha para o lado direito e esquerdo da distribuição)
 
 # O coeficiente de assimetria é o que permite dizer se uma determinada distribuição é assimétrica ou não.
 
