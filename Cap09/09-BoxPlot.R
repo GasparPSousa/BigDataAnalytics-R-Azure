@@ -54,6 +54,7 @@ boxplot(dados, main = "Número de Acidentes Diários")
 #' 
 #' 
 #' 
+
 # Sair
 q()
 
