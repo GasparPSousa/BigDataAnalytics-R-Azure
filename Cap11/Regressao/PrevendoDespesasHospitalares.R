@@ -76,4 +76,16 @@ modelo <- lm(gastos ~ ., data = despesas)
 # Visualizando os coeficientes
 modelo
 
+# Prevendo despesas médicas 
+?predict
 
+
+# Aqui verificamos os gastos previstos pelo modelo que devem ser iguais aos dados de treino
+previsao1 <- predict(modelo)
+View(previsao1)
+
+# Prevendo os gastos com Dados de teste
+despesasteste <- read.csv("~/Cursos/DSA/FCD/Scripts/Arquivos-Cap11/Regressao/despesas-teste.csv")
+View(despesasteste)
+previsao2 <- predict(modelo, despesasteste)
+View(previsao2)
