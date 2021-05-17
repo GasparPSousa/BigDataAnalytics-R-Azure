@@ -11,6 +11,6 @@
 ### Cap08 - Introdução à Análise Estatística de Dados - Parte 1
 ### Cap09 - Introdução à Análise Estatística de Dados - Parte 2
 ### Cap10 - Introdução à Análise Estatística de Dados - Parte 3
-
+### Cap11 - Machine Learning em Linguagem R
 
 ##### Criei esse repositório para ir fazendo e praticando todo o aprendizado desenvolvido curso e servir de consultas futuras.
