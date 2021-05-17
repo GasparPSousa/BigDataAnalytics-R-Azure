@@ -65,3 +65,15 @@ library(psych)
 
 # Este gráfico fornece mais informações sobre o relacionamento entre as variáveis
 pairs.panels(despesas[c('idade', 'bmi', 'filhos', 'gastos')])
+
+# Etapa 3: Treinando o Modelo (usando os dados de treino)
+?lm
+modelo <- lm(gastos ~ idade + filhos + bmi + sexo + fumante + regiao, data = despesas)
+
+# Similar ao item anterior
+modelo <- lm(gastos ~ ., data = despesas)
+
+# Visualizando os coeficientes
+modelo
+
+
