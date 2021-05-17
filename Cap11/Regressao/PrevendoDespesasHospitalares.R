@@ -174,3 +174,38 @@ summary(modelo)
 
 # Lembre-se que correlação não implica causalidade
 
+
+
+# Etapa 5: Otimizando a Performance do Modelo
+
+# Adicionando uma variável com o dobro do valor das idades
+
+despesas$idade2 <- despesas$idade ^ 2
+
+
+# Adicionando um indicador para BMI >= 30
+despesas$bmi30 <- ifelse(despesas$bmi >= 30, 1, 0)
+
+View(despesas)
+
+
+
+# Criando o modelo final
+modelo_v2 <- lm(gastos ~ idade + idade2 + filhos + bmi + sexo + 
+                  bmi30 * fumante + regiao, data = despesas)
+
+summary(modelo_v2)
+
+
+
+# Dados de teste
+despesasteste <- read.csv("~/Cursos/DSA/FCD/Scripts/Arquivos-Cap11/Regressao/despesas-teste.csv")
+View(despesasteste)
+
+despesasteste$idade2 <- despesasteste$idade ^ 2
+despesasteste$bmi30 <- ifelse(despesasteste$bmi >= 30, 1, 0)
+
+previsao <- predict(modelo_v2, despesasteste)
+
+class(previsao)
+View(previsao)
