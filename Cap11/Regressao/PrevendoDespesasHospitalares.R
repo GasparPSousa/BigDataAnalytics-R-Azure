@@ -142,3 +142,35 @@ summary(modelo)
 # Se este valor for realmente pequeno, o R irá mostrar o valor 
 # como notação científica
 
+
+# Significância
+# São aquelas legendas próximas as suas variáveis
+# Espaço em branco - ruim
+# Pontos - razoável
+# Asteriscos - bom
+# Muitos asteriscos - muito bom
+
+# Residual Standar Error
+# Este valor representa o desvio padrão dos resíduos
+
+# Degrees of Freedom
+# É a diferença entre o número de observações na amostra de treinamento 
+# e o número de variáveis no seu modelo
+
+# R-squared (coeficiente de determinação - R^2)
+# Ajuda a avaliar o nível de precisão do nosso modelo. 
+# Quanto maior, melhor, sendo 1 o valor ideal.
+
+# F-statistics
+# É o teste F do modelo. Esse teste obtém os parâmetros do nosso modelo 
+# e compara com um modelo que tenha menos parâmetros.
+# Em teoria, um modelo com mais parâmetros tem um desempenho melhor. 
+
+# Se o seu modelo com mais parâmetros NÃO tiver perfomance
+# melhor que um modelo com menos parâmetros, o valor do p-value será bem alto. 
+
+# Se o modelo com mais parâmetros tiver performance
+# melhor que um modelo com menos parâmetros, o valor do p-value será mais baixo.
+
+# Lembre-se que correlação não implica causalidade
+
