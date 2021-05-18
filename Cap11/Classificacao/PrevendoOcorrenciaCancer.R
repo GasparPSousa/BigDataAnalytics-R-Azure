@@ -28,3 +28,24 @@ search()
 dados <- read.csv("~/Cursos/DSA/FCD/Scripts/Arquivos-Cap11/Classificacao/dataset.csv", stringsAsFactors = F)
 str(dados)
 View(dados)
+
+
+## Etapa 2 - Pré-Processamento
+
+# Excluindo a coluna ID
+# Independentemente do método de aprendizagem de máquina, deve sempre ser excluídas 
+# variáveis de ID. Caso contrário, isso pode levar a resultados errados porque o ID 
+# pode ser usado para unicamente "prever" cada exemplo. Por conseguinte, um modelo 
+# que inclui um identificador pode sofrer de superajuste (overfitting), 
+# e será muito difícil usá-lo para generalizar outros dados.
+
+dados$id = NULL
+
+# Ajustando o label da variável alvo
+dados$diagnosis = sapply(dados$diagnosis, function(x){ifelse(x == 'M', 'Maligno', 'Benigno')})
+
+# Muitos classificadores requerem que as variáveis sejam do tipo Fator
+table(dados$diagnosis)
+dados$diagnosis <- factor(dados$diagnosis, levels = c('Benigno', 'Maligno'), labels = c('Benigno','Maligno'))
+str(dados)
+str(dados$diagnosis)
