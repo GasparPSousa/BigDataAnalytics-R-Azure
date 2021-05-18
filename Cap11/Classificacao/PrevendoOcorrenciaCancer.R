@@ -76,3 +76,36 @@ normalizar(c(10, 20, 30, 40, 50))
 
 dados_norm <- as.data.frame(lapply(dados[2:31], normalizar))
 View(dados_norm)
+
+
+## Etapa 3: Treinando o modelo com KNN
+## k-nearest neighbors algorithm 
+## Vizinho mais próximo
+
+# Carregando o pacote library
+# install.packages("class")
+library(class)
+?knn
+
+
+# Criando dados de treino e dados de teste
+## O ideal seria fazer uma amostragem aleatória, mas para esse exemplo simples, assim está ok.
+dados_treino <- dados_norm[1:469,]
+dados_teste <- dados_norm[470:569,]
+
+
+# Criando os labels para os dados de treino e de teste
+dados_treino_labels <- dados[1:469, 1]
+dados_teste_labels <- dados[470:569, 1]
+length(dados_treino_labels)
+length(dados_teste_labels)
+
+# Criando o modelo
+modelo_knn_v1 <- knn(train = dados_treino,
+                     test = dados_teste,
+                     cl = dados_treino_labels,
+                     k = 21)
+
+
+# A função knn() retorna um objeto do tipo fator com as previsões para cada exemplo no dataset de teste
+summary(modelo_knn_v1)
