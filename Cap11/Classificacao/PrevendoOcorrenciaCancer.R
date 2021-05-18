@@ -49,3 +49,30 @@ table(dados$diagnosis)
 dados$diagnosis <- factor(dados$diagnosis, levels = c('Benigno', 'Maligno'), labels = c('Benigno','Maligno'))
 str(dados)
 str(dados$diagnosis)
+
+
+# Verificando a proporção
+round(prop.table(table(dados$diagnosis)) * 100, digits = 1) 
+
+
+# Medidas de Tendência Central
+# Detectamos um problema de escala entre os dados, que então precisam ser normalizados
+# O cálculo de distância feito pelo kNN é dependente das medidas de escala nos dados de entrada.
+
+summary(dados[c("radius_mean", "area_mean", "smoothness_mean")])
+
+
+# Criando um função de normalização
+normalizar <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+
+# Testando a função de normalização - os resultados devem ser idênticos
+normalizar(c(1, 2, 3, 4, 5))
+normalizar(c(10, 20, 30, 40, 50))
+
+# Normalizando os dados
+
+dados_norm <- as.data.frame(lapply(dados[2:31], normalizar))
+View(dados_norm)
