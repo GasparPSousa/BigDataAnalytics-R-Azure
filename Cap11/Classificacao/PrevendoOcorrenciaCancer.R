@@ -137,7 +137,7 @@ CrossTable(x = dados_teste_labels, y = modelo_knn_v1, prop.chisq = F)
 # Lendo a Confusion Matrix (Perspectiva de ter ou não a doença):
 
 # True Negative  = nosso modelo previu que a pessoa NÃO tinha a doença e os dados mostraram que realmente a pessoa NÃO tinha a doença
-# False Positive = nosso modelo previu que a pessoa tinha a doença e os dados mostraram que NÃO, a pessoa tinha a doença
+# False Positive = nosso modelo previu que a pessoa tinha a doença e os dados mostraram que NÃO, a pessoa não tinha a doença
 # False Negative = nosso modelo previu que a pessoa NÃO tinha a doença e os dados mostraram que SIM, a pessoa tinha a doença
 # True Positive = nosso modelo previu que a pessoa tinha a doença e os dados mostraram que SIM, a pessoa tinha a doença
 
@@ -145,3 +145,38 @@ CrossTable(x = dados_teste_labels, y = modelo_knn_v1, prop.chisq = F)
 # Falso Negativo - Erro Tipo II
 
 # Taxa de acerto do Modelo: 98% (acertou 98 em 100)
+
+
+## Etapa 5: Otimizando a Performance do Modelo
+
+# Usando a função scale() para padronizar o z-score 
+?scale()
+dados_z <- as.data.frame(scale(dados[-1]))
+
+# Confirmando transformação realizada com sucesso
+summary(dados_z$area_mean)
+
+
+# Criando novos datasets de treino e de teste
+dados_treino2 <- dados_z[1:469,]
+dados_teste2 <- dados_z[470:569,]
+
+dados_treino2_labels <- dados[1:469, 1]
+dados_teste2_labels <- dados[470:569, 1]
+
+
+# Reclassificando
+modelo_knn_v2 <- knn(train = dados_treino2,
+                     test = dados_teste2,
+                     cl = dados_treino2_labels,
+                     k = 21)
+
+# Criando uma tabela cruzada dos dados previstos x dados atuais
+
+CrossTable(x = dados_teste2_labels, y = modelo_knn_v2, prop.chisq = F)
+
+## No caso, essa otimização teve uma taxa de acerto de 95%, ou seja, essa otimização piorou o modelo.
+
+# Experimente diferentes valores para k
+## Em ambos casos, foi usado k = 21. Depois fazer a mesma coisa, variando apenas o k.
+
