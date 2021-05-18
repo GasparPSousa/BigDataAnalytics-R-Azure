@@ -263,6 +263,31 @@ mean(pred_test == testset$diagnosis)
 # Confusion Matrix
 table(pred_test, testset$diagnosis)
 
-## Com esse modelo SVM tivemos uma taxa de acerto do 98% para dados de treino e 97% para dados de teste.
+## Com o algoritmo SVM tivemos uma taxa de acerto do 98% para dados de treino e 97% para dados de teste.
 
 
+
+# Etapa 7: Construindo um Modelo com Algoritmo Random Forest
+
+# Criando o modelo
+library(rpart)
+
+modelo_rf_v1 = rpart(diagnosis ~ ., data = trainset, control = rpart.control(cp = .0005))
+
+# Previsões nos dados de teste
+tree_pred = predict(modelo_rf_v1, testset, type = 'class')
+
+# Percentual de previsões corretas com dataset de teste
+mean(tree_pred == testset$diagnosis)
+
+# Confusion Matrix
+table(tree_pred, testset$diagnosis)
+
+
+# Com o algoritmo Random Forest, tivemos uma taxa de acerto de 94%. 
+## Provavelmente se usássemos apenas as variáveis mais importantes no algoritmo Random Forest, 
+## ele teria uma taxa de acerto maior.
+
+
+# Sair
+q()
