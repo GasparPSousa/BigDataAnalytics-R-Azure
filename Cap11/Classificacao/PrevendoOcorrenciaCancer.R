@@ -180,3 +180,89 @@ CrossTable(x = dados_teste2_labels, y = modelo_knn_v2, prop.chisq = F)
 # Experimente diferentes valores para k
 ## Em ambos casos, foi usado k = 21. Depois fazer a mesma coisa, variando apenas o k.
 
+
+
+# Etapa 6: Construindo um Modelo com Algoritmo Support Vector Machine (SVM)
+## Algoritmo Fabuloso, uma obra de arte, incrível!
+## Pode ser usado tanto para problema de Regressão quanto para problemas de Classificação.
+
+# Definindo a semente para resultados reproduzíveis
+set.seed(40)
+
+# Prepara o dataset
+dados <- read.csv("~/Cursos/DSA/FCD/Scripts/Arquivos-Cap11/Classificacao/dataset.csv", stringsAsFactors = F)
+dados$id = NULL
+
+### Preciso transformar em factor
+dados$diagnosis = sapply(dados$diagnosis, function(x){ifelse(x == 'M', 'Maligno', 'Benigno')})
+table(dados$diagnosis)
+dados$diagnosis <- factor(dados$diagnosis, levels = c('Benigno', 'Maligno'), labels = c('Benigno','Maligno'))
+str(dados)
+str(dados$diagnosis)
+
+
+dados[,'index'] <- ifelse(runif(nrow(dados)) < 0.8, 1, 0)
+## criação randômica do index
+View(dados)
+
+# Dados de treino e teste
+
+trainset <- dados[dados$index==1,]
+testset <- dados[dados$index==0,]
+
+
+# Obter o índice 
+trainColNum <- grep('index', names(trainset))
+
+# Remover o índice dos datasets
+trainset <- trainset[,-trainColNum]
+testset <- testset[,-trainColNum]
+
+
+# Obter índice de coluna da variável target no conjunto de dados
+typeColNum <- grep('diag', names(dados))
+
+
+
+# Cria o modelo
+# Nós ajustamos o kernel para radial, já que este conjunto de dados não tem um 
+# plano linear que pode ser desenhado
+
+library(e1071)
+install.packages('e1071')
+library(e1071)
+?svm
+
+
+modelo_svm_v1 <- svm(diagnosis ~ .,
+                     data = trainset,
+                     type = 'C-classification',
+                     kernel = 'radial')
+
+str(dados)
+
+# Previsões
+
+# Previsões nos dados de treino
+pred_train <- predict(modelo_svm_v1, trainset)
+
+
+
+# Percentual de previsões corretas com dataset de treino
+mean(pred_train == trainset$diagnosis)
+
+
+# Previsões nos dados de teste
+pred_test <- predict(modelo_svm_v1, testset)
+
+
+# Percentual de previsões corretas com dataset de teste
+mean(pred_test == testset$diagnosis)
+
+
+# Confusion Matrix
+table(pred_test, testset$diagnosis)
+
+## Com esse modelo SVM tivemos uma taxa de acerto do 98% para dados de treino e 97% para dados de teste.
+
+
