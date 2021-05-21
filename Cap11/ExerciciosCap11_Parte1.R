@@ -59,3 +59,33 @@ y5 <- (y2[51]-50*(b+2))+(b+2)*x
 lines(x,y3,lty=3)
 lines(x,y4,lty=3)
 lines(x,y5,lty=3)
+
+
+
+## Exercício 2 - Pesquisa sobre idade e tempo de reação
+
+# Criando os dados
+Idade <- c(9,13,14,21,15,18,20,8,14,23,16,21,10,12,20,
+           9,13,5,15,21)
+
+Tempo <- c(17.87,13.75,12.72,6.98,11.01,10.48,10.19,19.11,
+           12.72,0.45,10.67,1.59,14.91,14.14,9.40,16.23,
+           12.74,20.64,12.34,6.44)
+
+# Crie um Gráfico de Dispersão (ScatterPlot)
+plot(Idade, Tempo, 
+     xlab = 'Idade',
+     ylab = 'Tempo de Reação')
+
+# Crie um modelo de regressão
+modelo <- lm(Tempo ~ Idade)
+modelo
+
+# Calcule a reta de regressão
+y <- a + bx
+reta <- 25.8134 -0.9491 * Idade
+
+
+# Crie o gráfico da reta
+
+lines(Idade, reta)
