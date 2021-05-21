@@ -89,3 +89,54 @@ reta <- 25.8134 -0.9491 * Idade
 # Crie o gráfico da reta
 
 lines(Idade, reta)
+
+
+# Exercício 3 - Relação entre altura e peso
+
+# Criando os dados
+alturas = c(176, 154, 138, 196, 132, 176, 181, 169, 150, 175)
+pesos = c(82, 49, 53, 112, 47, 69, 77, 71, 62, 78)
+
+plot(alturas, pesos, pch = 16, cex = 1.3, col = 'blue',
+     main = "Altura x Peso",
+     ylab = "Peso Corporal (kg)",
+     xlab = "Altura (cm)")
+
+# Crie o modelo de regressão
+modelo <- lm(pesos ~ alturas)
+
+# Visualizando o modelo
+modelo
+summary(modelo)
+
+# Gere a linha de regressão
+abline(-70.4627, 0.8528)
+
+
+# Faça as previsões de pesos com base na nova lista de alturas(NUNCA vista pelo modelo)
+alturas2 = data.frame(c(179, 152, 134, 197, 131, 178, 185, 162, 155, 172))
+previsao <- predict(modelo, alturas2)
+previsao
+
+# Plot com dados originais
+plot(alturas, pesos, pch = 16, cex = 1.3, col = 'blue',
+     main = "Altura x Peso",
+     ylab = "Peso Corporal (kg)",
+     xlab = "Altura (cm)")
+
+# Construindo a linha de regressão
+abline(lm(pesos ~ alturas))
+
+
+# Obtendo o tamanho de uma das amostras de dados
+num <- length(alturas)
+num
+
+# Gerando um gráfico com os valores residuais
+for (k in 1: num)  
+  lines(c(alturas[k], alturas[k]), 
+        c(pesos[k], pesos[k]))
+
+# Gerando gráficos com a distribuição dos resíduos
+par(mfrow = c(2,2))
+plot(modelo)
