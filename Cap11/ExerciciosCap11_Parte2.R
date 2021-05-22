@@ -100,3 +100,69 @@ summary(modelo_v3)
 # 0.0002675
 summary(modelo_v4)
 # 0.06442
+
+
+# Visualizando o Modelo e Fazendo Previsões
+
+# Obtendo os resíduos
+res <- residuals(modelo_v1)
+
+
+# Convertendo o objeto para um dataframe
+res <- as.data.frame(res)
+head(res)
+
+# Histograma dos resíduos
+ggplot(res, aes(res)) +  
+  geom_histogram(fill = 'blue', 
+                 alpha = 0.5, 
+                 binwidth = 1)
+
+# Plot do Modelo
+plot(modelo_v1)
+
+# Fazendo as predições
+modelo_v1 <- lm(G3 ~ ., treino)
+prevendo_G3 <- predict(modelo_v1, teste)
+prevendo_G3
+
+# Visualizando os valores previstos e observados
+resultados <- cbind(prevendo_G3, teste$G3)
+colnames(resultados) <- c('Previsto', 'Real')
+resultados <- as.data.frame(resultados)
+resultados
+min(resultados)
+
+
+# Tratando os valores negativos
+trata_zero <- function(x) {
+  if (x < 0) {
+    return (0)
+  } else {
+    return (x)
+  }
+}
+
+# Aplicando a função para tratar valores negativos em nossa previsão
+resultados$Previsto <- sapply(resultados$Previsto, trata_zero)
+resultados$Previsto
+
+# Calculando o erro médio
+# Quão distantes seus valores previstos estão dos valores observados
+# MSE
+mse <- mean((resultados$Real - resultados$Previsto)^2)
+print(mse)
+
+# RMSE
+rmse <- mse^0.5
+rmse
+
+# Calculando R Squared
+SSE = sum((resultados$Previsto - resultados$Real)^2)
+SST = sum((mean(df$G3) - resultados$Real)^2)
+
+
+# R-Squared
+# Ajuda a avaliar o nível de precisão do nosso modelo. Quanto maior, melhor, sendo 1 o valor ideal.
+R2 = 1 - (SSE / SST)
+R2
