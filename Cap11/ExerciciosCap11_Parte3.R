@@ -69,16 +69,41 @@ treino = subset(dados_normalizados, split == T)
 teste = subset(dados_normalizados, split == F)
 
 # Obtendo o nome das colunas
-colunas_nomes <- names(treino)
-colunas_nomes
+coluna_nomes <- names(treino)
+coluna_nomes
 
 # Agregando
-formula <- as.formula(paste("medv ~", paste(colunas_nomes[!colunas_nomes %in% "medv"], collapse = " + ")))
+formula <- as.formula(paste("medv ~", paste(coluna_nomes[!coluna_nomes %in% "medv"], collapse = " + ")))
 formula
-
 
 # Treinando o Modelo
 rede_neural <- neuralnet(formula, data = treino, hidden = c(5,3), linear.output = T)
 
 # Plot
 plot(rede_neural)
+
+
+# Fazendo previsoes com os dados de teste
+rede_neural_prev <- compute(rede_neural, teste[1:13])
+rede_neural_prev
+
+# O retorno da previsao da Rede Neural é uma lista
+str(rede_neural_prev)
+
+# Convertendo os dados de teste
+previsoes <- rede_neural_prev$net.result * (max(dados$medv) - min(dados$medv)) + min(dados$medv)
+teste_convert <- (teste$medv) * (max(dados$medv) - min(dados$medv)) + min(dados$medv)
+teste_convert
+
+# Calculando o Mean Squared Error
+MSE.nn <- sum((teste_convert - previsoes)^2)/nrow(teste)
+MSE.nn
+
+# Obtendo os erros de previsao
+error.df <- data.frame(teste_convert, previsoes)
+head(error.df)
+
+# Plot dos erros
+library(ggplot2)
+ggplot(error.df, aes(x = teste_convert,y = previsoes)) + 
+  geom_point() + stat_smooth()
