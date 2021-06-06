@@ -46,3 +46,30 @@ letters_classifier
 letter_predictions <- predict(letters_classifier, letters_teste)
 head(letter_predictions)
 table(letter_predictions, letters_teste$letter)
+
+
+# Criando um vetor de TRUE/FALSE indicando previsoes corretas/incorretas
+agreement <- letter_predictions == letters_teste$letter
+table(agreement)
+prop.table(table(agreement))
+
+# Otimizando o modelo
+set.seed(12345)
+
+# Recriando o modelo com outro tipo de kernel
+letters_classifier_rbf <- ksvm(letter ~ ., data = letters_treino, kernel = "rbfdot")
+letter_classifier_rbf <- ksvm(letter ~ ., data = letters_treino, kernel = "rbfdot")
+
+# Novas Previsões
+letter_predictions_rbf <- predict(letters_classifier_rbf, letters_teste)
+
+# Compare os resultados com a primeira versao do modelo
+agreement_rbf <- letter_predictions_rbf == letters_teste$letter
+table(agreement_rbf)
+prop.table(table(agreement_rbf))
+
+## Com o kernel "rbfdot" aumentou a performance do modelo para 93%.
+## Com o kernel "vanilladot" a performance do modelo estava em 84%.
+
+# Sair
+q()
